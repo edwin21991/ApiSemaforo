@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="nodo-texto"></div>
+  <script>
+    const API = "https://sig.simur.gov.co/arcgis/rest/services/CentroGestion/CG_Semaforos/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
+        
+        i = Math.floor(Math.random()*1505)
+       
+        console.log(i)
+        
+        fetch(API).then(response =>response.json()).then(data =>{        
+
+          console.log(data.features[i].attributes)
+          let elemento = document.getElementById("nodo-texto")
+
+          elemento.innerHTML= `<h4>
+                                  AUTOMATICO_SEMANA: ${data.features[i].attributes.AUTOMATICO_SEMANA}<br>
+                                  C_CONTROL: ${data.features[i].attributes.COD_ID_INT}<br>
+                                  COD_ID_INT: ${data.features[i].attributes.C_CONTROL}<br>
+                                  LOCALIDAD: ${data.features[i].attributes.LOCALIDAD}<br>
+                                  DIRECCION: ${data.features[i].attributes.DIRECCION}<br>
+                                  DISP_PDM:${data.features[i].attributes.DISP_PDM}<br>
+                                  ESQUEMA: ${data.features[i].attributes.ESQUEMA}<br>
+                                  EXTERNO: ${data.features[i].attributes.EXTERNO}<br>
+                                  FECHA_IMP_INT: ${data.features[i].attributes.FECHA_IMP_INT}<br>
+                                  GR_SENALES: ${data.features[i].attributes.GR_SENALES}<br>
+                                  IMPLEMENTA: ${data.features[i].attributes.IMPLEMENTA}<br>
+                                  INFRA_CICL: ${data.features[i].attributes.INFRA_CICL}<br>
+                                  LATITUD: ${data.features[i].attributes.LATITUD}<br>
+                                  LONGITUD: ${data.features[i].attributes.LONGITUD}<br>
+                                  OBJECTID: ${data.features[i].attributes.OBJECTID}<br>
+                                  OPERACION: ${data.features[i].attributes.OPERACION}<br>
+                                  PLANEAMIENTO: ${data.features[i].attributes.PLANEAMIENTO}<br>
+                                  TIPO_INTER: ${data.features[i].attributes.TIPO_INTER}
+                                </h4>`
+          
+        })
+        .catch(err=>console.log(err))
+  </script>
+</body>
+</html> 
